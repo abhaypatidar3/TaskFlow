@@ -1,0 +1,9 @@
+.auth-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at 30% 20%, rgba(99,102,241,.08) 0%, transparent 60%), var(--bg-primary); padding: 1rem; }
+.auth-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; width: 100%; max-width: 420px; box-shadow: var(--shadow); }
+.auth-logo { text-align: center; margin-bottom: 2rem; }
+.auth-logo h1 { font-size: 1.75rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-light), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.auth-logo p { color: var(--text-secondary); font-size: .875rem; margin-top: .25rem; }
+.auth-error { background: var(--danger-bg); border: 1px solid rgba(239,68,68,.25); color: var(--danger); padding: .625rem .875rem; border-radius: var(--radius-sm); font-size: .8rem; margin-bottom: 1rem; }
+.auth-form { display: flex; flex-direction: column; gap: .875rem; }
+.auth-footer { text-align: center; margin-top: 1.5rem; font-size: .8rem; color: var(--text-muted); }
+.auth-footer a { color: var(--accent-light); text-decoration: none; font-weight: 500; }

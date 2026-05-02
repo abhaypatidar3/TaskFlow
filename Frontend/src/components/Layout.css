@@ -1,0 +1,6 @@
+.app-layout { display: flex; height: 100vh; overflow: hidden; }
+.main-content { flex: 1; overflow-y: auto; display: flex; flex-direction: column; }
+.topbar { padding: 1.25rem 2rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--bg-secondary); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 10; }
+.topbar h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.02em; }
+.topbar-actions { display: flex; gap: .5rem; align-items: center; }
+.page-body { padding: 1.5rem 2rem 3rem; flex: 1; }

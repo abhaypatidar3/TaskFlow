@@ -1,0 +1,11 @@
+.task-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; transition: var(--transition); cursor: pointer; border-left: 3px solid var(--border); }
+.task-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.task-card.high { border-left-color: var(--danger); }
+.task-card.medium { border-left-color: var(--warning); }
+.task-card.low { border-left-color: var(--success); }
+.task-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .4rem; }
+.task-card-title { font-size: .88rem; font-weight: 600; flex: 1; }
+.task-card-meta { display: flex; gap: .4rem; flex-wrap: wrap; align-items: center; }
+.task-assignee { font-size: .75rem; color: var(--text-secondary); }
+.task-due { font-size: .72rem; color: var(--text-muted); }
+.task-due.overdue { color: var(--danger); font-weight: 600; }
