@@ -5,7 +5,11 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "build": "echo 'Backend build successful (no transpilation required)'"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   },
   "keywords": [],
   "author": "",
