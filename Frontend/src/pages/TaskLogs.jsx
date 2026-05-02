@@ -47,7 +47,7 @@ export default function TaskLogs() {
         <div className="tl-header">
           <h2>Work Logs</h2>
           <div className="tl-header-right">
-            <select className="form-select" value={selectedProject} onChange={e => setSelectedProject(e.target.value)} style={{ minWidth: 160, fontSize: '.78rem' }}>
+            <select className="form-select" value={selectedProject} onChange={e => setSelectedProject(e.target.value)} style={{ fontSize: '.78rem' }}>
               <option value="">All Projects</option>
               {projects.map(p => <option key={p._id} value={p._id}>{p.name}</option>)}
             </select>

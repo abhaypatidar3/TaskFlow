@@ -68,10 +68,10 @@ export default function Dashboard() {
       {/* Status breakdown */}
       <div className="card" style={{ marginBottom: '1.5rem' }}>
         <h3 style={{ fontSize: '.9rem', fontWeight: 700, marginBottom: '1rem' }}>Status Overview</h3>
-        <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+        <div className="status-overview">
           {Object.entries(s.byStatus || {}).map(([key, val]) => (
-            <div key={key} style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>{val}</div>
+            <div key={key} className="status-item">
+              <div className="status-count">{val}</div>
               <span className={`badge badge-${key.toLowerCase()}`}>{key.replace('_', ' ')}</span>
             </div>
           ))}
@@ -80,15 +80,15 @@ export default function Dashboard() {
 
       {/* Overdue tasks */}
       {data.overdueTasks?.length > 0 && (
-        <div className="card" style={{ marginBottom: '1.5rem', borderColor: 'rgba(239,68,68,.25)' }}>
+        <div className="card" style={{ marginBottom: '1.5rem', borderColor: 'rgba(255,85,114,.25)' }}>
           <h3 style={{ fontSize: '.9rem', fontWeight: 700, marginBottom: '.75rem', color: 'var(--danger)' }}>⚠️ Overdue Tasks</h3>
           {data.overdueTasks.map(t => (
-            <div key={t._id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '.5rem 0', borderBottom: '1px solid var(--border)', cursor: 'pointer' }} onClick={() => navigate(`/tasks/${t._id}`)}>
-              <div>
-                <span style={{ fontWeight: 600, fontSize: '.85rem' }}>{t.title}</span>
-                <span style={{ marginLeft: '.5rem', fontSize: '.72rem', color: 'var(--text-muted)' }}>{t.project?.name}</span>
+            <div key={t._id} className="dash-task-row" onClick={() => navigate(`/tasks/${t._id}`)}>
+              <div className="dash-task-left">
+                <span className="dash-task-title">{t.title}</span>
+                <span style={{ fontSize: '.72rem', color: 'var(--text-muted)', flexShrink: 0 }}>{t.project?.name}</span>
               </div>
-              <span style={{ fontSize: '.72rem', color: 'var(--danger)' }}>{new Date(t.dueDate).toLocaleDateString()}</span>
+              <span className="dash-task-meta" style={{ color: 'var(--danger)' }}>{new Date(t.dueDate).toLocaleDateString()}</span>
             </div>
           ))}
         </div>
@@ -101,12 +101,12 @@ export default function Dashboard() {
             {isAdmin ? 'Recent Tasks' : 'Upcoming Tasks'}
           </h3>
           {(isAdmin ? data.recentTasks : data.upcomingTasks).map(t => (
-            <div key={t._id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '.5rem 0', borderBottom: '1px solid var(--border)', cursor: 'pointer' }} onClick={() => navigate(`/tasks/${t._id}`)}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
-                <span className={`badge badge-${t.status?.toLowerCase()}`} style={{ fontSize: '.6rem' }}>{t.status?.replace('_', ' ')}</span>
-                <span style={{ fontWeight: 500, fontSize: '.85rem' }}>{t.title}</span>
+            <div key={t._id} className="dash-task-row" onClick={() => navigate(`/tasks/${t._id}`)}>
+              <div className="dash-task-left">
+                <span className={`badge badge-${t.status?.toLowerCase()}`} style={{ fontSize: '.6rem', flexShrink: 0 }}>{t.status?.replace('_', ' ')}</span>
+                <span className="dash-task-title">{t.title}</span>
               </div>
-              <span style={{ fontSize: '.72rem', color: 'var(--text-muted)' }}>{t.assignee?.name || 'Unassigned'}</span>
+              <span className="dash-task-meta">{t.assignee?.name || 'Unassigned'}</span>
             </div>
           ))}
         </div>

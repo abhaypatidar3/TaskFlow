@@ -178,4 +178,23 @@
 @media (max-width: 768px) {
   .wl-stats { grid-template-columns: 1fr 1fr; }
   .wl-timeline-row { grid-template-columns: 60px 1fr; }
+  .wl-timeline-time-axis { grid-template-columns: 60px 1fr; }
+  .wl-chart-header { flex-direction: column; align-items: flex-start; gap: .5rem; }
+  .wl-timeline-header { flex-direction: column; align-items: flex-start; gap: .5rem; }
+  .wl-heatmap-header { flex-direction: column; align-items: flex-start; }
+  .wl-heatmap-header-stats { flex-wrap: wrap; gap: .5rem; }
+  .wl-heatmap-footer { flex-direction: column; align-items: flex-start; }
+  .wl-date-nav span { min-width: 140px; font-size: .72rem; }
+}
+
+@media (max-width: 480px) {
+  .wl-stats { grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .wl-stat-value { font-size: 1.1rem; }
+  .wl-timeline-row { grid-template-columns: 52px 1fr; min-height: 40px; }
+  .wl-timeline-time-axis { grid-template-columns: 52px 1fr; }
+  .wl-timeline-bar-container { height: 26px; }
+  .wl-chart-toggle { flex-wrap: wrap; }
+  .wl-heatmap-section { padding: 1rem .75rem .5rem; }
+  .wl-chart-section { padding: 1rem; }
+  .wl-timeline-section { padding: 1rem; }
 }
