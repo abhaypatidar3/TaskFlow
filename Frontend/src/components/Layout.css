@@ -1,6 +1,110 @@
-.app-layout { display: flex; height: 100vh; overflow: hidden; }
-.main-content { flex: 1; overflow-y: auto; display: flex; flex-direction: column; }
-.topbar { padding: 1.25rem 2rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--bg-secondary); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 10; }
-.topbar h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.02em; }
-.topbar-actions { display: flex; gap: .5rem; align-items: center; }
-.page-body { padding: 1.5rem 2rem 3rem; flex: 1; }
+.app-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ── Topbar ── */
+.topbar {
+  padding: 0 2rem;
+  height: 64px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  flex-shrink: 0;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  min-width: 0;
+}
+
+.topbar h1 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Page Body ── */
+.page-body {
+  padding: 1.5rem 2rem 3rem;
+  flex: 1;
+}
+
+/* ── Hamburger Button ── */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 0.35rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.hamburger-btn:hover {
+  background: var(--accent-glow);
+  border-color: var(--border-accent);
+}
+.hamburger-btn span {
+  display: block;
+  height: 2px;
+  background: var(--text-secondary);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ── Sidebar Backdrop ── */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(4px);
+  z-index: 99;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .hamburger-btn { display: flex; }
+  .sidebar-backdrop { display: block; }
+
+  .topbar { padding: 0 1rem; }
+  .topbar h1 { font-size: 1rem; }
+  .page-body { padding: 1rem 1rem 2rem; }
+}
+
+@media (max-width: 480px) {
+  .topbar-actions .btn span { display: none; }
+}

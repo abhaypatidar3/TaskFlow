@@ -5,14 +5,27 @@ const api = axios.create({
   withCredentials: true, // send cookies automatically
 });
 
+// Public paths where a 401 should NOT redirect to /login
+const PUBLIC_PATHS = ['/', '/login', '/signup'];
+
 api.interceptors.response.use(
   (res) => res,
   (err) => {
     if (err.response?.status === 401) {
-      localStorage.removeItem('user');
-      // Only redirect if not already on auth pages
-      if (!window.location.pathname.startsWith('/login') && !window.location.pathname.startsWith('/signup')) {
+      const requestUrl = err.config?.url || '';
+      const currentPath = window.location.pathname;
+      const isPublicPage = PUBLIC_PATHS.some(p => currentPath === p || currentPath.startsWith(p + '/'));
+      const isSessionCheck = requestUrl.includes('/auth/me');
+
+      // Only force-redirect to login if:
+      // - We're on a protected page (not a public page)
+      // - The 401 is NOT from the silent session check on mount
+      if (!isPublicPage && !isSessionCheck) {
+        localStorage.removeItem('user');
         window.location.href = '/login';
+      } else {
+        // On public pages, just clear local state silently
+        localStorage.removeItem('user');
       }
     }
     return Promise.reject(err);
