@@ -18,8 +18,8 @@ function getBarColor(mins) {
   return '#1e293b';
 }
 
-const TASK_COLORS = ['#22c55e','#3b82f6','#f59e0b','#ef4444','#a855f7','#06b6d4','#ec4899','#84cc16'];
-const HOURS_AXIS = [10,11,12,13,14,15,16,17,18,19,20,21];
+const TASK_COLORS = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#a855f7', '#06b6d4', '#ec4899', '#84cc16'];
+const HOURS_AXIS = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
 const TIMELINE_START = 9;
 const TIMELINE_END = 22;
 const TIMELINE_SPAN = (TIMELINE_END - TIMELINE_START) * 60;
@@ -78,7 +78,7 @@ export default function WorkLogs() {
       setTimeline(tRes.data.timeline || []);
       setHeatmap(hRes.data.heatmap || []);
       setDaily(dRes.data.log);
-    }).catch(() => {}).finally(() => setLoading(false));
+    }).catch(() => { }).finally(() => setLoading(false));
   }, [range, tlEnd]);
 
   const todayMins = daily?.totalMinutes || 0;
@@ -232,7 +232,7 @@ export default function WorkLogs() {
           <div className="wl-heatmap-wrapper">
             {/* Day-of-week labels */}
             <div className="wl-heatmap-day-labels">
-              {['','Mon','','Wed','','Fri',''].map((d, i) => (
+              {['', 'Mon', '', 'Wed', '', 'Fri', ''].map((d, i) => (
                 <div key={i} className="wl-heatmap-day-label">{d}</div>
               ))}
             </div>
@@ -250,7 +250,7 @@ export default function WorkLogs() {
                         onMouseLeave={() => setHoveredCell(null)}
                       >
                         {hoveredCell === `${wi}-${ci}` && (
-                          <div className="wl-tooltip">{cell.date}<br/>{fmtHM(cell.minutes)}</div>
+                          <div className="wl-tooltip">{cell.date}<br />{fmtHM(cell.minutes)}</div>
                         )}
                       </div>
                     ) : (
@@ -280,7 +280,7 @@ export default function WorkLogs() {
             <span style={{ fontSize: '.68rem', color: 'var(--text-muted)' }}>Work activity in the past one year</span>
             <div className="wl-heatmap-legend">
               <span>Less</span>
-              {[0,1,2,3,4].map(l => <div key={l} className={`wl-heatmap-cell level-${l}`} style={{ width: 11, height: 11 }} />)}
+              {[0, 1, 2, 3, 4].map(l => <div key={l} className={`wl-heatmap-cell level-${l}`} style={{ width: 11, height: 11 }} />)}
               <span>More</span>
             </div>
           </div>

@@ -6,7 +6,10 @@ const Project = require('../models/project.model');
 // ── Helpers ─────────────────────────────────────────────────
 function normalizeDate(d) {
   const dt = new Date(d);
-  dt.setHours(0, 0, 0, 0);
+  // Always normalize to UTC midnight to prevent timezone-based duplicates.
+  // Without this, IST (UTC+5:30) servers produce dates like "2026-05-01T18:30:00Z"
+  // (previous UTC day) causing two DailyLog documents for the same calendar date.
+  dt.setUTCHours(0, 0, 0, 0);
   return dt;
 }
 
@@ -149,12 +152,28 @@ const getMyTimeline = async (req, res) => {
       cursor.setDate(cursor.getDate() + 1);
     }
 
+    const toEndOfDay = new Date(to);
+    toEndOfDay.setUTCHours(23, 59, 59, 999);
+
     const logs = await DailyLog.find({
       user: req.user._id,
-      date: { $gte: fromDate, $lte: to },
+      date: { $gte: fromDate, $lte: toEndOfDay },
     }).sort({ date: -1 });
 
-    res.json({ timeline: logs });
+    // Deduplicate: if two docs share the same calendar date (legacy timezone issue),
+    // keep the one with the most minutes.
+    const seen = new Map();
+    for (const log of logs) {
+      const key = log.date.toISOString().split('T')[0];
+      if (!seen.has(key) || log.totalMinutes > seen.get(key).totalMinutes) {
+        seen.set(key, log);
+      }
+    }
+    const deduped = Array.from(seen.values()).sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    );
+
+    res.json({ timeline: deduped });
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch timeline.', error: err.message });
   }
